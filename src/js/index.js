@@ -1,6 +1,6 @@
-// import axios from "axios";
-// import SlimSelect from 'slim-select';
-// import Notiflix from 'notiflix';
-
+import axios from "axios";
+import Notiflix from 'notiflix';
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
 // import { fetchBreeds, fetchCatByBreed } from './cat-api';
 
