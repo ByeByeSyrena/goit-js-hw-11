@@ -9,6 +9,10 @@ const gallery = document.querySelector(".gallery");
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = "38857854-067aa7c8dbb389fbf2efb7da8"
 
+let arrayOfImgs = null;
+
+form.addEventListener("submit", getImgParams);
+
 const fetchImgs = async () =>  {
   try {
     const response = await axios.get(BASE_URL, {
@@ -28,15 +32,18 @@ const fetchImgs = async () =>  {
 }
 };
 
-let arrayOfImgs = null;
+  async function getImgParams() {
+    arrayOfImgs = await fetchImgs();
 
-async function getImgParams() {
-  arrayOfImgs = await fetchImgs();
-  const markup = arrayOfImgs
-    .map(
-      ({ webformatURL, largeImageURL, tag, likes, views, comments, downloads, }) => `
-    <div class="photo-card">
-  <img src="${webformatURL}" alt="${tag}" loading="lazy" />
+    if (arrayOfImgs.length === 0) { 
+      Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
+    };
+
+    const markup = arrayOfImgs
+      .map(
+        ({ webformatURL, largeImageURL, tag, likes, views, comments, downloads, }) => `
+     <div class="photo-card">
+        <img src="${webformatURL}" alt="${tag}" loading="lazy" />
   <div class="info">
     <p class="info-item">
       <b>Likes: ${likes}</b>
@@ -52,7 +59,6 @@ async function getImgParams() {
     </p>
   </div>
 </div>`).join("");
-  gallery.insertAdjacentHTML("afterbegin", markup);
-};
+    gallery.insertAdjacentHTML("afterbegin", markup);
+  };
 
-getImgParams();
