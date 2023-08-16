@@ -9,9 +9,9 @@ let input = form.elements.searchQuery;
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = "38857854-067aa7c8dbb389fbf2efb7da8"
 
-async function getGallery() {
+const fetchImgs = async () =>  {
   try {
-    const response = await axios.get(BASE_URL, { 
+    const response = await axios.get(BASE_URL, {
       params:
       {
         key: API_KEY,
@@ -21,34 +21,38 @@ async function getGallery() {
         p: input.value,
       }
     });
-    return response.hits;
+    return response.data.hits;
   }
   catch(error) {
     console.log("error");
 }
 };
 
-// getGallery();
+let arrayOfImgs = null;
 
+async function getImgParams() {
+  arrayOfImgs = await fetchImgs();
+  const markup = arrayOfImgs
+    .map(
+      ({ webformatURL, largeImageURL, tag, likes, views, comments, downloads, }) => `
+    <div class="photo-card">
+  <img src="${webformatURL}" alt="${tag}" loading="lazy" />
+  <div class="info">
+    <p class="info-item">
+      <b>Likes: ${likes}</b>
+    </p>
+    <p class="info-item">
+      <b>Views: ${views}</b>
+    </p>
+    <p class="info-item">
+      <b>Comments: ${comments}</b>
+    </p>
+    <p class="info-item">
+      <b>Downloads: ${downloads}</b>
+    </p>
+  </div>
+</div>`).join("");
+  form.insertAdjacentHTML("afterend", markup);
+};
 
-form.addEventListener("submit", async (event) => {
-
-  event.preventDefault();
-  const searchKeywords = input.value.toLowerCase().split(" ").join("+");
-  
-  input.value = searchKeywords;
-
-  if (!searchKeywords || searchKeywords == "") {
-    Notiflix.Notify.warning("Sorry, there are no images matching your search query. Please try again.");
-    return;
-  };
-
-    try {
-    const galleryData = await getGallery(searchKeywords);
-    console.log(galleryData);
-  } catch (error) {
-    console.error('Error:', error);
-  };
-});
-
-
+getImgParams();
