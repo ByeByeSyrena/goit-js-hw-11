@@ -4,16 +4,15 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
 const form = document.getElementById("search-form");
-let input = form.elements.searchQuery;
 const gallery = document.querySelector(".gallery");
+const input = form.elements.searchQuery;
+
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = "38857854-067aa7c8dbb389fbf2efb7da8"
 
 let arrayOfImgs = null;
 
-form.addEventListener("submit", getImgParams);
-
-const fetchImgs = async () =>  {
+const fetchImgs = async (searchQuery) =>  {
   try {
     const response = await axios.get(BASE_URL, {
       params:
@@ -22,7 +21,7 @@ const fetchImgs = async () =>  {
         image_type: 'photo',
         orientation: 'horizontal',
         safesearch: 'true',
-        p: input.value,
+        q: searchQuery,
       }
     });
     return response.data.hits;
@@ -32,11 +31,23 @@ const fetchImgs = async () =>  {
 }
 };
 
-  async function getImgParams() {
-    arrayOfImgs = await fetchImgs();
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const searchQuery = input.value;
+ if (!searchQuery.trim()) {
+    return;
+  };
+  await getImgParams(searchQuery);
+});
+
+
+  async function getImgParams(searchQuery) {
+    arrayOfImgs = await fetchImgs(searchQuery);
 
     if (arrayOfImgs.length === 0) { 
       Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
+      return;
     };
 
     const markup = arrayOfImgs
@@ -61,4 +72,3 @@ const fetchImgs = async () =>  {
 </div>`).join("");
     gallery.insertAdjacentHTML("afterbegin", markup);
   };
-
