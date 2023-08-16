@@ -5,7 +5,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 
 const form = document.getElementById("search-form");
 let input = form.elements.searchQuery;
-
+const gallery = document.querySelector(".gallery");
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = "38857854-067aa7c8dbb389fbf2efb7da8"
 
@@ -52,7 +52,7 @@ async function getImgParams() {
     </p>
   </div>
 </div>`).join("");
-  form.insertAdjacentHTML("afterend", markup);
+  gallery.insertAdjacentHTML("afterbegin", markup);
 };
 
 getImgParams();
