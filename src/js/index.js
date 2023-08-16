@@ -21,7 +21,7 @@ async function getGallery() {
         p: input.value,
       }
     });
-    return response;
+    return response.hits;
   }
   catch(error) {
     console.log("error");
