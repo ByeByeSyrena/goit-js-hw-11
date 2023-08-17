@@ -34,7 +34,6 @@ const fetchImgs = async (searchQuery) =>  {
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
-  gallery.innerHTML = "";
 
   const searchQuery = input.value;
  if (!searchQuery.trim()) {
@@ -44,25 +43,24 @@ form.addEventListener("submit", async (event) => {
 });
 
 
-  async function getImgParams(searchQuery) {
-    arrayOfImgs = await fetchImgs(searchQuery);
+async function getImgParams(searchQuery) {
+  arrayOfImgs = await fetchImgs(searchQuery);
 
-    if (arrayOfImgs.length === 0) { 
-      Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
-      return;
-    };
+  if (arrayOfImgs.length === 0) {
+    Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
+    return;
+  };
 
-    const markup = arrayOfImgs
-      .map(
-        ({ webformatURL, largeImageURL, tag, likes, views, comments, downloads, }) => `
+  const markup = arrayOfImgs
+    .map(
+      ({ webformatURL, largeImageURL, tag, likes, views, comments, downloads, }) => `
      <div class="photo-card">
-        <a 
-    class = "gallery__link"
-    href="${largeImageURL}"
-    ><img src="${webformatURL}" alt="${tag}" loading="lazy" class="gallery__image" height="300" width="300"/></a>
+     <a class = "gallery__link" href="${largeImageURL}">
+    <img src="${webformatURL}" alt="${tag}" loading="lazy" class="gallery__image" height="300" width="300"/>
+    </a>
   <div class="info">
     <p class="info-item">
-      <b>Likes: ${likes}</br>
+      <b>Likes: ${likes}</b>
     </p>
     <p class="info-item">
       <b>Views: ${views}</b>
@@ -75,9 +73,12 @@ form.addEventListener("submit", async (event) => {
     </p>
   </div>
 </div>`).join("");
-    gallery.insertAdjacentHTML("afterbegin", markup);
+  
+  gallery.insertAdjacentHTML("afterbegin", markup);
+};  
+
 
     var lightbox = new SimpleLightbox('.gallery a');
 
-    lightbox.refresh()
-  };
+  //   lightbox.refresh()
+
