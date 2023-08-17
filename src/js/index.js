@@ -24,6 +24,7 @@ const fetchImgs = async (searchQuery) =>  {
         q: searchQuery,
       }
     });
+    console.log('Response:', response); // не приберу бо забуду звідки data
     return response.data.hits;
   }
   catch(error) {
