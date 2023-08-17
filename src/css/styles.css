@@ -34,7 +34,7 @@
 .gallery__link {
   display: block;
   text-decoration: none;
-  height: 100%;
+  overflow: hidden;
 }
 
 .gallery__link:hover {

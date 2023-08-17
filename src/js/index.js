@@ -56,7 +56,7 @@ form.addEventListener("submit", async (event) => {
       .map(
         ({ webformatURL, largeImageURL, tag, likes, views, comments, downloads, }) => `
      <div class="photo-card">
-        <a
+        <a 
     class = "gallery__link"
     href="${largeImageURL}"
     ><img src="${webformatURL}" alt="${tag}" loading="lazy" class="gallery__image"/></a>
@@ -77,7 +77,7 @@ form.addEventListener("submit", async (event) => {
 </div>`).join("");
     gallery.insertAdjacentHTML("afterbegin", markup);
 
-    var lightbox = new SimpleLightbox('.gallery a', {
-  
-});
+    var lightbox = new SimpleLightbox('.gallery a');
+
+    lightbox.refresh()
   };
