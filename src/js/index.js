@@ -34,6 +34,7 @@ const fetchImgs = async (searchQuery) =>  {
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
+  gallery.innerHTML = "";
 
   const searchQuery = input.value;
  if (!searchQuery.trim()) {
@@ -55,10 +56,13 @@ form.addEventListener("submit", async (event) => {
       .map(
         ({ webformatURL, largeImageURL, tag, likes, views, comments, downloads, }) => `
      <div class="photo-card">
-        <img src="${webformatURL}" alt="${tag}" loading="lazy" />
+        <a
+    class = "gallery__link"
+    href="${largeImageURL}"
+    ><img src="${webformatURL}" alt="${tag}" loading="lazy" class="gallery__image"/></a>
   <div class="info">
     <p class="info-item">
-      <b>Likes: ${likes}</b>
+      <b>Likes: ${likes}</br>
     </p>
     <p class="info-item">
       <b>Views: ${views}</b>
@@ -72,4 +76,8 @@ form.addEventListener("submit", async (event) => {
   </div>
 </div>`).join("");
     gallery.insertAdjacentHTML("afterbegin", markup);
+
+    var lightbox = new SimpleLightbox('.gallery a', {
+  
+});
   };
