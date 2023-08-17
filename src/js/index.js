@@ -10,6 +10,8 @@ const input = form.elements.searchQuery;
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = "38857854-067aa7c8dbb389fbf2efb7da8"
 
+var lightbox = new SimpleLightbox('.gallery a');
+
 let arrayOfImgs = null;
 
 const fetchImgs = async (searchQuery) =>  {
@@ -75,10 +77,9 @@ async function getImgParams(searchQuery) {
 </div>`).join("");
   
   gallery.insertAdjacentHTML("afterbegin", markup);
+  lightbox.refresh();
 };  
 
 
-    var lightbox = new SimpleLightbox('.gallery a');
 
-  //   lightbox.refresh()
 
