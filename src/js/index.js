@@ -59,7 +59,7 @@ form.addEventListener("submit", async (event) => {
         <a 
     class = "gallery__link"
     href="${largeImageURL}"
-    ><img src="${webformatURL}" alt="${tag}" loading="lazy" class="gallery__image"/></a>
+    ><img src="${webformatURL}" alt="${tag}" loading="lazy" class="gallery__image" height="300" width="300"/></a>
   <div class="info">
     <p class="info-item">
       <b>Likes: ${likes}</br>
