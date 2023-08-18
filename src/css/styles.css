@@ -3,6 +3,17 @@
   --animation-duration: 250ms;
 }
 
+body {
+background-color: rgb(244, 221, 243);
+}
+
+:active,
+:hover,
+:focus {
+    outline: 0;
+    outline-offset: 0;
+}
+
 .gallery {
   display: grid;
   max-width: 1140px;
@@ -15,6 +26,7 @@
 
 .photo-card {
   position: relative;
+background-color: white;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
@@ -40,4 +52,74 @@
 
 .gallery__link:hover {
   cursor: zoom-in;
+}
+
+.is-hidden {
+    display: none;
+}
+
+.search-form{
+    display: block;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    box-shadow: 0px 10px 5px 0px rgba(211, 98, 188, 0.36);
+    -webkit-box-shadow: 0px 10px 5px 0px rgba(211, 98, 188, 0.36);
+    -moz-box-shadow: 0px 10px 5px 0px rgba(211, 98, 188, 0.36);
+}
+
+.search-button {
+display: block;
+margin: 0 auto;
+background-color: #EA4C89;
+border-radius: 8px;
+border-style: none;
+box-sizing: border-box;
+color: #FFFFFF;
+cursor: pointer;
+font-size: 14px;
+font-weight: 500;
+height: 40px;
+line-height: 20px;
+list-style: none;
+outline: none;
+padding: 10px 16px;
+position: relative;
+text-align: center;
+text-decoration: none;
+transition: color 100ms;
+vertical-align: baseline;
+user-select: none;
+-webkit-user-select: none;
+touch-action: manipulation;
+}
+    
+.search-button:hover,
+.search-button:focus {
+ background-color: #F082AC;
+}
+
+.search-input {
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 30px 20px;
+    appearance: auto;
+    min-width: 30px;
+    border: 1.5px solid var(--white-color);
+    border-radius: 4px;
+}
+
+.search-input::placeholder {
+text-align: center;
+color: #EA4C89;
+;}
+
+
+input[type=text] {
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 60%;
+    background-color: #F082AC;
+    color: white;
 }
